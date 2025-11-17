@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Nosso Casamento — Confirme presença</title>
+	<!-- Tipografia elegante -->
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+	<!-- Instruções: substitua as constantes DATA_CASAMENTO, HORA, ENDERECO_EMBED e EMAIL_DOS_NOIVOS no arquivo abaixo conforme necessário -->
+</head>
+
+<body>
+	<header class="hero" role="banner">
+		<div class="hero-bg" aria-hidden="true"></div>
+		<div class="hero-inner">
+	 		<h1 class="couple">Carolina & João</h1>
+	 		<p class="tag">Convidamos você para celebrar conosco</p>
+			<p class="date" id="wedding-date" data-datetime="2026-11-22T08:00:00">22 de Novembro de 2026 — 08:00</p>
+			<div id="countdown" class="countdown">
+				<div><span id="days">--</span><small>Dias</small></div>
+				<div><span id="hours">--</span><small>Horas</small></div>
+				<div><span id="minutes">--</span><small>Minutos</small></div>
+				<div><span id="seconds">--</span><small>Segundos</small></div>
+			</div>
+			<div class="hero-cta">
+				<a class="btn" href="#rsvp">Confirmar Presença</a>
+				<a class="btn btn-ghost" href="#local">Ver Local</a>
+			</div>
+		</div>
+	</header>
+
+	<main class="container">
+		<section id="about" class="card">
+			<h2>Informações do Dia</h2>
+			<p>Será um dia de muita alegria. Cerimônia às 08:00 seguida de recepção com jantar e música. Traje: passeio completo / social.</p>
+			<ul class="info-list">
+				<li><strong>Data:</strong> <span id="info-date">22/11/2026</span></li>
+				<li><strong>Horário:</strong> <span id="info-time">08:00</span></li>
+				<li><strong>Traje:</strong> Passeio completo</li>
+			</ul>
+		</section>
+
+		<section id="local" class="card">
+			<h2>Local</h2>
+			<p>Local do casamento: <strong>Igreja Trindade</strong></p>
+			<p>O mapa abaixo aponta para a Igreja Trindade — se precisar, substitua pelo iframe oficial do Google Maps.</p>
+			<!-- O src realiza uma busca pelo nome; se precisar de precisão, gere o embed no Google Maps e cole o iframe -->
+			<div class="map-wrap map-placeholder" aria-hidden="false">
+				<div class="map-text">
+					<p class="address"><strong>Endereço:</strong> Paróquia Santíssima Trindade — Rua Tuim 33, Arapongas, PR, 86709-380</p>
+					<p class="time"><strong>Horário:</strong> 08:00</p>
+				</div>
+			</div>
+			<p class="map-note">Endereço e horário exibidos acima.</p>
+		</section>
+
+		<section id="rsvp" class="card rsvp-card">
+			<h2>Confirmar presença</h2>
+			<p>Por favor confirme até 30 dias antes do evento. Você pode confirmar aqui (salva localmente) e enviar um e-mail automático para os noivos.</p>
+			<form id="rsvp-form" class="rsvp-form">
+				<label>Nome completo<input type="text" name="name" id="name" required></label>
+				<label>Email<input type="email" name="email" id="email" required></label>
+				<label>Vai comparecer?
+					<select name="attending" id="attending" required>
+						<option value="">Selecione</option>
+						<option value="yes">Sim</option>
+						<option value="no">Não</option>
+					</select>
+				</label>
+				<label>Número de acompanhantes<input type="number" name="guests" id="guests" min="0" max="10" value="0"></label>
+				<label>Mensagem (opcional)<textarea id="message" rows="3"></textarea></label>
+				<div class="form-actions">
+					<button type="submit" class="btn">Enviar e salvar</button>
+					<button type="button" id="mailto-btn" class="btn btn-ghost">Enviar por e-mail</button>
+				</div>
+				<p class="note">Os dados são salvos apenas neste navegador. Para receber confirmações centralizadas, forneça um e-mail para envio automático no campo abaixo do código.</p>
+			</form>
+			<div id="rsvp-success" class="success" hidden>Obrigado! Sua resposta foi salva. Nos vemos em 22/11/2026 às 08:00.</div>
+		</section>
+
+		<section class="card small" id="notes">
+			<h3>Observações</h3>
+			<p>Se desejar que eu ajuste a página (cores, texto, ou integrar com um serviço de backend/Google Sheets), posso ajudar — me diga o e-mail dos noivos e a data/hora final.</p>
+		</section>
+
+		<!-- Painel admin: aparece apenas quando ?admin=1 na URL -->
+		<section id="admin" class="card admin" hidden>
+			<h2>Painel de RSVPs (admin)</h2>
+			<p class="note">Acesse a página com <code>?admin=1</code> para ver respostas gravadas neste navegador.</p>
+			<div class="admin-actions">
+				<button id="btn-export" class="btn">Exportar CSV</button>
+				<button id="btn-clear" class="btn btn-ghost">Limpar RSVPs (local)</button>
+			</div>
+			<div id="admin-list" class="admin-list" aria-live="polite"></div>
+		</section>
+
+		<!-- Modal simples para confirmações e avisos -->
+		<div id="modal" class="modal" role="dialog" aria-modal="true" hidden>
+			<div class="modal-panel">
+				<button class="modal-close" id="modal-close" aria-label="Fechar">✕</button>
+				<div id="modal-content"></div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<small>Feito com ♥ — personalize este site editando o arquivo <code>index.html</code></small>
+	</footer>
+
+	<script src="script.js"></script>
+</body>
+</html>
